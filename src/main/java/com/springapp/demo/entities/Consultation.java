@@ -5,20 +5,19 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import java.util.Collection;
 import java.util.Date;
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor
-public class Patient {
+@Data @AllArgsConstructor @NoArgsConstructor
+public class Consultation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private int age;
     @Temporal(TemporalType.DATE)
-    private Date dateOfBirth;
-    private boolean sick;
-    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
-    private Collection<RendezVous> rendezVous;
+    private Date consultationDate;
+    private String rapport;
+    @OneToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private RendezVous rendezVous;
 }

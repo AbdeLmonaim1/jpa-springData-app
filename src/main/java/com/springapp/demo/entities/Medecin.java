@@ -9,16 +9,16 @@ import lombok.NoArgsConstructor;
 import java.util.Collection;
 import java.util.Date;
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor
-public class Patient {
+@Data @AllArgsConstructor @NoArgsConstructor
+public class Medecin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int age;
-    @Temporal(TemporalType.DATE)
-    private Date dateOfBirth;
-    private boolean sick;
-    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    private String email;
+    private String specialite;
+    @OneToMany(mappedBy = "medecin")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<RendezVous> rendezVous;
 }
